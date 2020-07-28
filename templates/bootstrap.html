@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}El Dolar BTC{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='main.css')}}">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69036843-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-69036843-2');
+</script>
+
+{% endblock %}
+
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="Font">
+<p style="text-align: center;"><strong>Dólar Bitcoin en Argentina</strong></p>
+<p style="text-align: center;">Compra: ${{ value1 }}</p>
+<p style="text-align: center;">Venta: ${{ value2 }}</p>
+<p style="text-align: center;">Promedio: ${{ value3 }}</p>
+<p style="color:green;text-align: center;">Bitcoin: ${{ value4 }}</p>
+<br>
+<p style="text-align: center;"><strong>BTC/USD</strong></p>
+</div>
+<!-- Add image example for future reference-->
+<div align=center>
+<script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
+<coingecko-coin-price-chart-widget  coin-id="bitcoin" currency="usd" height="400" locale="es" width="600"></coingecko-coin-price-chart-widget>
+</div>
+<!--<p><img style="display: block; margin-left: auto; margin-right: auto;" src="/static/precios.png?{{ts}}" alt="price" width="600" height="400" /></p>-->
+
+<br>
+<div id="parrafo">
+<p><strong>Sobre El Dólar Bitcoin</strong></p>
+<p>El Bitcoin se intercambia de forma libre los 7 d&iacute;as de la semana y sin restricciones gubernamentales, por lo que el &ldquo;D&oacute;lar Bitcoin&rdquo; es considerado un &iacute;ndice indicativo del precio real del d&oacute;lar en Argentina.</p>
+<p>El Precio del Dólar Bitcoin se obtiene dividiendo el precio de venta de Bitcoin en Argentina por el Precio Internacional de Bitcoin. La formula es sencilla:<span class="Apple-converted-space">&nbsp;</span></p>
+<p style="text-align: center;"><em><span style="color:green;">Precio de venta de Bitcoin en Argentina / Precio internacional del Bitcoin</span></em></p>
+<p><a href="https://eldolarbtc.com">Eldolarbtc.com</a> busca de forma automatica el precio de las &uacute;ltimas ofertas de compra y venta de Bitcoins en el mercado Argentino, las promedia y divide el resultado por el valor actual del Bitcoin en d&oacute;lares estadounidenses. <span class="Apple-converted-space">&nbsp;</span></p>
+<p><strong>API</strong></p>
+<p><a href="https://eldolarbtc.com/api">Eldolarbtc.com/api</a> mantiene una api actualizada para desarrolladores, la misma se encuentra en formato json y se actualiza cada minuto.<span class="Apple-converted-space">&nbsp;</span></p>
+<p><span class="Apple-converted-space">&nbsp;</span></p>
+</div>
+<br>
+<br>
+<br>
+<p style="text-align: right;">&nbsp;</p>
+<p style="text-align: right;"><sub>Desarrollado y mantenido por <a href="https://github.com/PixelNoob">PixelNoob</a> &hearts;</sub></p>
+
+{% endblock %}
+
