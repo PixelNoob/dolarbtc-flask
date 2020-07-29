@@ -40,6 +40,8 @@ def create_dict():
     dict.update({'bitcoin':get_btc()})
     return dict
 
+data = json.dumps(create_dict())
+
 ## write to a json file
 with open('/root/dolarbtc/dolarbtc/data.json', 'w') as f:
-    f.write(json.dumps(create_dict()))
+    f.write(data)
