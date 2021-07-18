@@ -1,5 +1,9 @@
 import requests as r
 import json
+from datetime import datetime, date, timedelta
+
+hora = datetime.now()
+hora = datetime.strftime(hora,'%d-%m-%Y %H:%M:%S')
 
 def get_ask():
     lb_ask = r.get("https://localbitcoins.com/buy-bitcoins-online/ars/national-bank-transfer/.json").json()
@@ -38,6 +42,7 @@ def create_dict():
     dict.update({'venta':list[1]})
     dict.update({'promedio':list[2]})
     dict.update({'bitcoin':get_btc()})
+    dict.update({'time':hora})
     return dict
 
 data = json.dumps(create_dict())
