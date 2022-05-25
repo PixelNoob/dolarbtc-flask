@@ -20,14 +20,14 @@ limiter = Limiter(
 @app.route('/')
 @app.route('/home')
 def home():
-    with open('/root/dolarbtc/dolarbtc/data.json') as json_file:
+    with open('data.json') as json_file:
         data = json.load(json_file)
     return render_template("bootstrap.html", value1 = data['compra'], value2 = data['venta'], value3 = data['promedio'], value4 = "{:,.0f}".format(int(data['bitcoin'])))
 
 @app.route('/api')
 @limiter.limit("1/second", override_defaults=False)
 def api():
-    with open('/root/dolarbtc/dolarbtc/data.json') as json_file:
+    with open('data.json') as json_file:
         data = json.load(json_file)
     return jsonify(data)
 
