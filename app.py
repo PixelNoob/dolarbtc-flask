@@ -2,6 +2,8 @@ from flask import Flask, render_template, jsonify
 import requests as r
 import json
 from flask_bootstrap import Bootstrap
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 def create_app():
   app = Flask(__name__)
@@ -10,19 +12,24 @@ def create_app():
   return app
 
 app = create_app()
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["250 per day", "50 per hour"])
 
 @app.route('/')
 @app.route('/home')
 def home():
-    with open('data.json') as json_file:
+    with open('/root/dolarbtc/dolarbtc/data.json') as json_file:
         data = json.load(json_file)
     return render_template("bootstrap.html", value1 = data['compra'], value2 = data['venta'], value3 = data['promedio'], value4 = "{:,.0f}".format(int(data['bitcoin'])))
 
 @app.route('/api')
+@limiter.limit("1/second", override_defaults=False)
 def api():
-    with open('data.json') as json_file:
+    with open('/root/dolarbtc/dolarbtc/data.json') as json_file:
         data = json.load(json_file)
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8888, debug=False)
+    app.run(host='0.0.0.0', port=8888, debug=False)
