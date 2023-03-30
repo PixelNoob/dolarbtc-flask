@@ -29,7 +29,7 @@ def home():
 def api():
     with open('data.json') as json_file:
         data = json.load(json_file)
-    return jsonify(data)
+    return jsonify(data), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888, debug=False)
