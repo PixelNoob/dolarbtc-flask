@@ -4,21 +4,18 @@ from datetime import datetime, date, timedelta
 
 hora = datetime.now()
 hora = datetime.strftime(hora,'%d-%m-%Y %H:%M:%S')
+try:
+    belo = r.get('https://criptoya.com/api/belo/btc/ars/0.1').json()
+    lemon = r.get('https://criptoya.com/api/lemoncash/btc/ars/0.1').json()
+except Exception as e:
+    print(e)
 
 def get_ask():
-    lb_ask = r.get("https://localbitcoins.com/buy-bitcoins-online/ars/national-bank-transfer/.json").json()
-    ask_a = float(lb_ask["data"]["ad_list"][1]["data"]["temp_price"])
-    ask_b = float(lb_ask["data"]["ad_list"][2]["data"]["temp_price"])
-    ask_c = float(lb_ask["data"]["ad_list"][3]["data"]["temp_price"])
-    ask_medium = (ask_a + ask_b + ask_c) / 3
+    ask_medium=(belo['ask'] + lemon['ask']) / 2
     return round(ask_medium, 2)
 
 def get_buy():
-    lb_buy = r.get("https://localbitcoins.com/sell-bitcoins-online/ars/national-bank-transfer/.json").json()
-    buy_a = float(lb_buy["data"]["ad_list"][1]["data"]["temp_price"])
-    buy_b = float(lb_buy["data"]["ad_list"][2]["data"]["temp_price"])
-    buy_c = float(lb_buy["data"]["ad_list"][3]["data"]["temp_price"])
-    buy_medium = (buy_a + buy_b + buy_c) / 3
+    buy_medium = (belo['bid'] + lemon['bid']) / 2
     return round(buy_medium, 2)
 
 def get_btc():
@@ -48,5 +45,5 @@ def create_dict():
 data = json.dumps(create_dict())
 
 ## write to a json file
-with open('/root/dolarbtc/dolarbtc/data.json', 'w') as f:
+with open('data.json', 'w') as f:
     f.write(data)
