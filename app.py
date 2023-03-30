@@ -14,8 +14,8 @@ def create_app():
 app = create_app()
 limiter = Limiter(
     app,
-    key_func=get_remote_address,
     default_limits=["250 per day", "50 per hour"])
+limiter.key_func = get_remote_address
 
 @app.route('/')
 @app.route('/home')
